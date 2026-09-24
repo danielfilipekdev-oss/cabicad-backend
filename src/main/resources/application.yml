@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: cabicad-backend
+
+server:
+  # Backend is exposed locally on http://localhost:8080 (override with SERVER_PORT env var if needed)
+  port: ${SERVER_PORT:8080}
+
+cabicad:
+  cors:
+    # Frontend origins allowed to call /api/** directly (Vite dev server + vite preview).
+    # In dev the frontend normally goes through the Vite proxy (same origin), CORS is a fallback
+    # for direct calls, e.g. when VITE_API_BASE_URL=http://localhost:8080 is set.
+    allowed-origins:
+      - http://localhost:5173
+      - http://127.0.0.1:5173
+      - http://localhost:4173
+      - http://127.0.0.1:4173
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
